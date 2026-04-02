@@ -2,7 +2,7 @@ import pandas as pd
 import glob
 import os
 
-# 1. Match all Sold CSV files in the 'raw' folder
+# match
 file_pattern = os.path.join('raw', 'CRMLSSold*.csv')
 file_list = glob.glob(file_pattern)
 
@@ -11,7 +11,7 @@ if not file_list:
 else:
     print(f"Found {len(file_list)} Sold files. Starting merge process...")
 
-    # 2. Read all CSV files and append to a list
+    # read & append
     df_list = []
     for file in file_list:
         try:
@@ -21,10 +21,10 @@ else:
         except Exception as e:
             print(f"Error reading file {file}: {e}")
 
-    # 3. Concatenate all dataframes vertically
+
     combined_df = pd.concat(df_list, ignore_index=True)
 
-    # 4. Export to a final CSV file in the main folder
+    # export
     output_filename = 'Final_Clean_Sold_Transactions.csv'
     combined_df.to_csv(output_filename, index=False)
     
